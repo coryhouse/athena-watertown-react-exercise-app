@@ -37,7 +37,7 @@ class Users extends React.Component {
       <li key={user.id}>
         <button onClick={() => this.deleteUser(user.id)}>Delete</button>{" "}
         <Link id={"user-" + user.id} to={`/manage-user/${user.id}`}>
-          {user.name}
+          {user.name} - {user.email}
         </Link>
       </li>
     );
