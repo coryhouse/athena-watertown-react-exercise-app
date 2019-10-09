@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 const newUser = {
   id: null,
   name: "",
-  hairColor: ""
+  email: ""
 };
 
 function ManageUser(props) {
@@ -44,7 +44,7 @@ function ManageUser(props) {
     // using underscore prefix to avoid naming conflict with state
     const _errors = {};
     if (!user.name) _errors.name = "Name is required.";
-    if (!user.hairColor) _errors.hairColor = "Hair is required.";
+    if (!user.email) _errors.email = "Email is required.";
     setErrors(_errors);
     // If errors object still has no properties, then there are no errors.
     return Object.keys(_errors).length === 0;
@@ -82,13 +82,13 @@ function ManageUser(props) {
         />
 
         <Input
-          label="Hair color"
+          label="Email"
           type="text"
-          error={errors.hairColor}
-          name="hairColor" // this is the property we wanna set onChange
-          id="hair-color"
+          error={errors.email}
+          name="email" // this is the property we wanna set onChange
+          id="email"
           onChange={handleChange}
-          value={user.hairColor}
+          value={user.email}
         />
 
         <input
