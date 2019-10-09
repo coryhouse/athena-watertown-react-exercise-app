@@ -1,6 +1,7 @@
 import React from "react";
 import * as userApi from "./api/userApi";
 import { Link, Redirect } from "react-router-dom";
+import { toast } from "react-toastify";
 
 class Users extends React.Component {
   constructor(props) {
@@ -26,6 +27,7 @@ class Users extends React.Component {
     userApi.deleteUser(userId).then(() => {
       // Runs after the delete was successful
       const users = this.state.users.filter(user => user.id !== userId);
+      toast.success("User deleted.");
       this.setState({ users: users });
     });
   };
