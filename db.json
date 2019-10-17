@@ -1,29 +1,14 @@
 {
-  "users": [
-    {
-      "id": 2,
-      "name": "Leah",
-      "hairColor": "sandy blonde"
-    },
-    {
-      "id": 3,
-      "name": "Mike",
-      "hairColor": "Fabulous"
-    },
-    {
-      "id": 4,
-      "name": "Nathan",
-      "hairColor": "Spikey"
-    }
-  ],
-  "cars": [
+  "appointments": [
     {
       "id": 1,
-      "name": "Nissan"
+      "date": "2019-10-18T05:30:00.000Z",
+      "appointmentType": "follow-up"
     },
     {
       "id": 2,
-      "name": "Tesla"
+      "date": "2019-10-18T08:00:00.000Z",
+      "appointmentType": "test"
     }
   ]
 }
