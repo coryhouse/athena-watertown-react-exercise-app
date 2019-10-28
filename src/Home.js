@@ -1,5 +1,6 @@
 import React from "react";
+import Heading from "@athena/forge/Heading";
 
-const Home = () => <h1>Home</h1>;
+const Home = () => <Heading text="Home" />;
 
 export default Home;
