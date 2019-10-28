@@ -1,19 +1,19 @@
 {
   "users": [
     {
-      "id": 2,
-      "name": "Leah",
-      "hairColor": "sandy blonde"
+      "id": 7,
+      "name": "Josephine Alvarez",
+      "email": "josephine.alvarez@example.com"
     },
     {
-      "id": 3,
-      "name": "Mike",
-      "hairColor": "Fabulous"
+      "id": 8,
+      "name": "Vanessa Steward",
+      "email": "vanessa.steward@example.com"
     },
     {
-      "id": 4,
-      "name": "Nathan",
-      "hairColor": "Spikey"
+      "id": 9,
+      "name": "Andrew",
+      "email": "aberg@athenahealth.com"
     }
   ],
   "cars": [

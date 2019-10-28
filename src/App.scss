@@ -1,0 +1,91 @@
+@import '~@athena/forge/sass/forge-abstracts';
+
+body {
+  margin: 0;
+}
+
+.ah_app {
+
+  &{
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+
+  &__logo {
+    display: block;
+    margin: map-get($global-margin, small) map-get($global-margin, medium);
+  }
+
+  &__header {
+    background-color: map-get($color-brand, dark);
+    height: 42px;
+  }
+
+  &__body {
+    display: flex;
+    flex: 1;
+  }
+
+  &__navigation {
+    background-color: map-get($color-background, light);
+    padding: map-get($global-padding, large) 0;
+    flex: 0 0 200px;
+  }
+
+  & &__navigation-list {
+    list-style: none;
+    margin: 0 map-get($global-padding, large);
+  }
+
+  a.ah_app__navigation-link:link,
+  a.ah_app__navigation-link:visited {
+    border-bottom-color: transparent;
+    color: map-get($color-font, muted);
+    display: block;
+    padding: map-get($global-padding, medium) 0 map-get($global-padding, xsmall) 0;
+
+    .ah_app__navigation-icon {
+
+      & {
+        display: inline-block;
+        height: 18px;
+        margin-right: map-get($global-margin, small);
+        vertical-align: text-bottom;
+      }
+      
+      path,
+      .fe_c_icon__icon--primary {
+        fill: map-get($color-font, muted);
+      }
+    }
+  }
+
+  a.ah_app__navigation-link:hover,
+  a.ah_app__navigation-link.is-selected {
+    border-bottom-color: map-get($color-font, default);
+    color: map-get($color-font, default);
+    font-weight: bold;
+    
+    .ah_app__navigation-icon {      
+      path,
+      .fe_c_icon__icon--primary {
+        fill: map-get($color-font, default);
+      }
+    }
+  }
+
+  a.ah_app__navigation-link:focus {
+    box-shadow: none;
+  }
+
+  &__main {
+    flex: 1;
+    padding: map-get($global-padding, medium) map-get($global-padding, large);
+  }
+
+  .ah_c_user-list {
+    max-width: 650px;
+  }
+
+}

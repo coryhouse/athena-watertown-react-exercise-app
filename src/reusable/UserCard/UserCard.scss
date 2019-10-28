@@ -1,0 +1,29 @@
+@import '~@athena/forge/sass/forge-abstracts';
+
+.ah_c_user-card {
+  & {
+    display: flex;
+    align-items: center;
+  }
+
+  &__image {
+    margin-right: map-get($global-margin, small);
+
+    svg {
+      display: block;
+    }
+  }
+
+  &__link {
+    flex: 1;
+  }
+
+  &__actions {
+    margin-right: map-get($global-margin, small);
+  }
+
+  &.ah_c_user-card .ah_c_user-card__action-button {
+    padding: map-get($global-padding, xsmall) map-get($global-padding, small);
+  }
+
+}

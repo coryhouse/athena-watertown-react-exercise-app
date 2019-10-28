@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
-import Input from "./reusable/Input";
+import Heading from  "@athena/forge/Heading";
+import Form from "@athena/forge/Form";
+import FormField from "@athena/forge/FormField";
 import * as userApi from "./api/userApi";
-import { toast } from "react-toastify";
 
 const newUser = {
   id: null,
@@ -36,8 +37,7 @@ function ManageUser(props) {
   }, [props.match.params.userId]);
 
   function handleSave(savedUser) {
-    props.history.push("/users");
-    toast.success(savedUser.name + " saved! 🎉");
+    props.history.push(`/users?saved=success&name=${savedUser.name}`);
   }
 
   function isValid() {
@@ -69,34 +69,36 @@ function ManageUser(props) {
   if (isLoading) return "Loading... 🦄";
   return (
     <>
-      <h1>Manage User</h1>
-      <form onSubmit={saveUser}>
-        <Input
+      <Heading text="Manage User" className="fe_u_margin--bottom-medium" />
+      <Form
+        nested={true}
+        onSubmit={saveUser}
+        requiredVariation="allFieldsRequired"
+        buttonText={isFormSubmitted ? "Saving..." : "Save User"}
+      >
+        <FormField
           name="name"
-          label="Name"
+          labelText="Name"
           type="text"
           error={errors.name}
           id="user-name"
           onChange={handleChange}
           value={user.name}
+          required
         />
 
-        <Input
-          label="Email"
-          type="text"
+        <FormField
+          labelText="Email"
+          type="email"
           error={errors.email}
           name="email" // this is the property we wanna set onChange
           id="email"
           onChange={handleChange}
           value={user.email}
+          required
         />
 
-        <input
-          type="submit"
-          disabled={isFormSubmitted}
-          value={isFormSubmitted ? "Saving..." : "Save User"}
-        />
-      </form>
+      </Form>
     </>
   );
 }

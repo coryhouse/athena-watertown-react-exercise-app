@@ -1,7 +1,13 @@
 import React from "react";
 import * as userApi from "./api/userApi";
-import { Link, Redirect } from "react-router-dom";
-import { toast } from "react-toastify";
+import { Redirect } from "react-router-dom";
+import queryString from 'query-string';
+import Heading from "@athena/forge/Heading";
+import Button from "@athena/forge/Button";
+import List from "@athena/forge/List";
+import Toast from "@athena/forge/Toast";
+import ListItem from "@athena/forge/ListItem";
+import UserCard from "./reusable/UserCard";
 
 class Users extends React.Component {
   constructor(props) {
@@ -9,7 +15,8 @@ class Users extends React.Component {
 
     this.state = {
       users: [],
-      redirect: false
+      redirect: false,
+      userDeleted: false,
     };
 
     // bind in ctor
@@ -27,32 +34,52 @@ class Users extends React.Component {
     userApi.deleteUser(userId).then(() => {
       // Runs after the delete was successful
       const users = this.state.users.filter(user => user.id !== userId);
-      toast.success("User deleted.");
-      this.setState({ users: users });
+      this.setState({ users: users, userDeleted: true });
     });
-  };
-
-  renderUser = user => {
-    return (
-      <li key={user.id}>
-        <button onClick={() => this.deleteUser(user.id)}>Delete</button>{" "}
-        <Link id={"user-" + user.id} to={`/manage-user/${user.id}`}>
-          {user.name} - {user.email}
-        </Link>
-      </li>
-    );
   };
 
   // The JSX we returned here will be rendered.
   render() {
+    const values = queryString.parse(this.props.location.search);
     return (
       <>
-        <h1>Users</h1>
+        <Heading text="Users" className="fe_u_margin--bottom-medium" />
         {this.state.redirect && <Redirect to="/manage-user" />}
-        <button onClick={() => this.setState({ redirect: true })}>
-          Add User
-        </button>
-        <ul>{this.state.users.map(this.renderUser)}</ul>
+        <Button 
+          text="Add User"
+          icon="Add" 
+          onClick={() => this.setState({ redirect: true })} 
+          className="fe_u_margin--bottom-medium"
+        />
+        <List padded={false} className="ah_c_user-list">
+          {this.state.users.map( user => (
+            <ListItem key={user.id}>
+              <UserCard user={user} onDeleteClick={this.deleteUser} />
+            </ListItem>
+          ))}
+        </List>
+
+        {this.state.userDeleted &&
+          <Toast
+            id={'user-deleted-toast'}
+            headerText="User Deleted"
+            alertType="success"
+            onDismiss={() => {this.setState({userDeleted:false})}}
+          >
+            User was successfully deleted
+          </Toast>
+        }
+        
+        {values.saved === "success" &&
+          <Toast
+            id={'user-saved-toast'}
+            headerText="User Saved"
+            alertType="success"
+          >
+            {values.name} was saved successfully
+          </Toast>
+        }
+
       </>
     );
   }
