@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Input from "./reusable/Input";
 import * as userApi from "./api/userApi";
-import { toast } from "react-toastify";
 
 const newUser = {
   id: null,
@@ -36,8 +35,7 @@ function ManageUser(props) {
   }, [props.match.params.userId]);
 
   function handleSave(savedUser) {
-    props.history.push("/users");
-    toast.success(savedUser.name + " saved! 🎉");
+    props.history.push(`/users?saved=success&name=${savedUser.name}`);
   }
 
   function isValid() {
