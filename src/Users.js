@@ -1,7 +1,8 @@
 import React from "react";
 import * as userApi from "./api/userApi";
 import { Link, Redirect } from "react-router-dom";
-import { toast } from "react-toastify";
+import queryString from 'query-string';
+import Toast from "@athena/forge/Toast";
 
 class Users extends React.Component {
   constructor(props) {
@@ -9,7 +10,8 @@ class Users extends React.Component {
 
     this.state = {
       users: [],
-      redirect: false
+      redirect: false,
+      userDeleted: false,
     };
 
     // bind in ctor
@@ -27,8 +29,7 @@ class Users extends React.Component {
     userApi.deleteUser(userId).then(() => {
       // Runs after the delete was successful
       const users = this.state.users.filter(user => user.id !== userId);
-      toast.success("User deleted.");
-      this.setState({ users: users });
+      this.setState({ users: users, userDeleted: true });
     });
   };
 
@@ -45,6 +46,9 @@ class Users extends React.Component {
 
   // The JSX we returned here will be rendered.
   render() {
+
+    const values = queryString.parse(this.props.location.search);
+
     return (
       <>
         <h1>Users</h1>
@@ -53,6 +57,28 @@ class Users extends React.Component {
           Add User
         </button>
         <ul>{this.state.users.map(this.renderUser)}</ul>
+        
+        {this.state.userDeleted && 
+          <Toast
+            id={'user-deleted-toast'}
+            headerText="User Deleted"
+            alertType="success"
+            onDismiss={() => {this.setState({userDeleted:false})}}
+          >
+            User was successfully deleted
+          </Toast>
+        }
+
+        {values.saved === "success" &&
+          <Toast
+            id={'user-saved-toast'}
+            headerText="User Saved"
+            alertType="success"
+          >
+            {values.name} was saved successfully
+          </Toast>
+        }
+      
       </>
     );
   }
